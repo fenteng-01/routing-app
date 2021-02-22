@@ -7,6 +7,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ChildAComponent } from './first/child/child-a/child-a.component';
 import { ChildBComponent } from './first/child/child-b/child-b.component';
 
+import { PreloadAllModules } from '@angular/router';
+
 const routes: Routes = [
   {
     path: 'first-component',
@@ -19,11 +21,17 @@ const routes: Routes = [
   { path: 'second-component', component: SecondComponent },
   { path: '', redirectTo: '/first-component', pathMatch: 'full' },
   { path: 'customers', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
+  { path: 'orders', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
   { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(
+    routes,
+    {
+      preloadingStrategy: PreloadAllModules
+    }
+  )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
