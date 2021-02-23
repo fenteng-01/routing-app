@@ -7,7 +7,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ChildAComponent } from './first/child/child-a/child-a.component';
 import { ChildBComponent } from './first/child/child-b/child-b.component';
 
-import { PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -26,12 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(
-    routes,
-    {
-      preloadingStrategy: PreloadAllModules
-    }
-  )],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
